@@ -1,4 +1,4 @@
-using CToolkit.v1_0.Protocol;
+using CToolkit.v1_1.Protocol;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CToolkit.v1_0.Net
+namespace CToolkit.v1_1.Net
 {
     public class CtkNonStopTcpListener : ICtkProtocolNonStopConnect, IDisposable
     {
@@ -277,7 +277,7 @@ namespace CToolkit.v1_0.Net
             if (this.m_tcpListener != null) this.m_tcpListener.Stop();
 
             //一旦結束就死了, 需要重new, 所以清掉event沒問題
-            CtkEventUtil.RemoveEventHandlersFromOwningByFilter(this, (dlgt) => true);
+            CtkEventUtil.RemoveEventHandlersOfOwnerByFilter(this, (dlgt) => true);
 
 
         }
@@ -400,7 +400,7 @@ namespace CToolkit.v1_0.Net
         {
             try { this.Disconnect(); }
             catch (Exception ex) { CtkLog.Write(ex); }
-            CtkEventUtil.RemoveEventHandlersFromOwningByFilter(this, (dlgt) => true);
+            CtkEventUtil.RemoveEventHandlersOfOwnerByFilter(this, (dlgt) => true);
 
         }
 
